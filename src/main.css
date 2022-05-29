@@ -1,0 +1,184 @@
+@import url("https://rsms.me/inter/inter.css");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+    html {
+        font-family: "Inter", sans-serif;
+        font-size: 87.5%;
+        color: #1a1a1a;
+
+        box-sizing: border-box;
+    }
+
+    *, :before, :after {
+        box-sizing: inherit;
+        /* outline: 1px solid rgb(255 0 0 / 0.5); */
+    }
+
+    /* HACK */
+    #__next {
+        min-height: 100vh;
+        
+        display: flex;
+        flex-direction: column;
+    }
+    
+    #__next > main {
+        flex-grow: 1;
+        flex-shrink: 0;
+    
+        /* TEMPORARY? */
+        display: flex;
+        flex-direction: column;
+        /* justify-content: stretch; */
+    }
+
+    [type='text'],
+    [type='password'],
+    textarea {
+        @apply block rounded border-2 border-gray-200 hover:border-gray-300 transition-colors focus:ring-0 focus:shadow-none focus:outline-none focus:border-purple-800;
+    }
+
+    [type='checkbox'],
+    [type='radio'] {
+        @apply border-2 border-gray-300 hover:border-gray-400 text-purple-500 hover:text-purple-400 focus:ring-gray-400 focus:ring-1 transition-colors;
+    }
+
+    /* [type='checkbox']:checked:hover,
+    [type='radio']:checked:hover {
+        @apply bg-purple-400;
+    } */
+
+    [type='checkbox'] {
+        @apply rounded-sm;
+    }
+
+    /* [type='radio'] {
+        @apply border-2
+    } */
+}
+
+
+@layer components {
+    /* #region Buttons */
+    .button {
+        @apply
+            px-4 py-2 bg-blue-500 text-white font-semibold rounded transition-colors duration-100
+            focus:outline-none;
+        transition-property: filter;
+    
+        position: relative;
+    }
+    
+    /* .button::after {
+        content: attr(data-trailing-glyph);
+        /* data=-leading-glyph * /*unicode/icon*
+    } */
+    
+    .button::before {
+        content: "";
+    
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+    
+        border-radius: inherit;
+        @apply shadow transition-shadow duration-200;
+    }
+    
+    .button:not(:disabled):hover {
+        filter: brightness(1.1);
+    }
+    
+    /* FIXME: Use box-shadow opacity instead to improve performance */
+    .button:not(:disabled):hover::before {
+        @apply shadow-md;
+    }
+    
+    .button:not(:disabled):active {
+        filter: brightness(1.2);
+    }
+    
+    .button:not(:disabled):active::before {
+        @apply shadow-lg;
+    }
+    
+    .button:focus-visible {
+        text-decoration: underline;
+        text-decoration-style: dotted;
+    }
+    
+    .button:disabled {
+        opacity: 0.5; /* TEMPORARY, FIXME */
+        cursor: default;
+    }
+    /* #endregion */
+
+    .page {
+        @apply flex-grow p-8;
+    }
+
+    /* #region Headings */
+    .h1 {
+        @apply text-4xl font-bold tracking-tight;
+    }
+    /* #endregion */
+}
+
+@layer utilities {
+    .full-height {
+        min-height: calc(100vh - var(--page-header-height, 0px));
+    }
+}
+
+/* @layer utilities {
+    .lighten-a-bit {
+        filter: brightness(1.2);
+    }
+} */
+
+/* NProgress custom styles / overrides */
+#nprogress {
+    --custom-nprogress-color: #60A5FA;
+}
+#nprogress .bar {
+    /* background:  */
+    /* @ apply bg-blue-300; */
+    background: var(--custom-nprogress-color);
+
+    top: 100%;
+    z-index: -1;
+}
+#nprogress .peg {
+    box-shadow: 0 0 10px var(--custom-nprogress-color), 0 0 5px var(--custom-nprogress-color);
+}
+/* .nprogress-custom-loading-overlay-parent {
+    @apply relative;
+}
+.nprogress-custom-loading-overlay-parent::before {
+    content: '';
+    @apply fixed top-0 left-0 w-full h-full z-30;
+} */
+#nprogress .nprogress-custom-loading-overlay {
+    @apply fixed left-0 w-full h-full bg-white bg-opacity-50;
+    top: var(--page-header-height, 0);
+    z-index: -2;
+    animation: nprogress-custom-loading-overlay-fadein-appear 0.25s;
+}
+@keyframes nprogress-custom-loading-overlay-fadein-appear {
+    from {
+        opacity: 0;
+    }
+}
+.nprogress-custom-parent {
+    /* overflow: clip; */
+    /* position: fixed; */
+    overflow: unset;
+    /* overflow-x: hidden; */
+}

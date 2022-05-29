@@ -1,0 +1,1 @@
+type ValueOrCallbackParam<V, P = V> = V | ((prevValue: P) => V);
